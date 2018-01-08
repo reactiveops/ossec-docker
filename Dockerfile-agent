@@ -33,9 +33,6 @@ RUN chmod 755 /entrypoint.sh
 #
 VOLUME ["/var/ossec/data"]
 
-# Expose ports for sharing
-EXPOSE 1514/udp 1515/tcp 514/tcp 514/udp
-
 #
 # Define default command.
 #
