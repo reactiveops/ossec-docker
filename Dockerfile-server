@@ -27,8 +27,8 @@ RUN chmod 755 /init.sh &&\
 #
 # Add the bootstrap script
 #
-ADD ossec-server.sh /ossec-server.sh
-RUN chmod 755 /ossec-server.sh
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
 
 #
 # Specify the data volume
@@ -41,4 +41,4 @@ EXPOSE 1514/udp 1515/tcp 514/tcp 514/udp
 #
 # Define default command.
 #
-ENTRYPOINT ["/ossec-server.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
