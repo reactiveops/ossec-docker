@@ -3,6 +3,9 @@
 #
 # Initialize the custom data directory layout
 #
+
+set -eo pipefail
+
 source /data_dirs.env
 
 cd /var/ossec

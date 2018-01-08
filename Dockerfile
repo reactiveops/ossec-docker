@@ -1,13 +1,13 @@
 FROM centos:latest
 MAINTAINER Support <support@atomicorp.com>
 
-RUN yum -y update
-RUN yum -y install wget useradd postfix && yum clean all
-
-RUN cd /root; NON_INT=1 wget -q -O - https://updates.atomicorp.com/installers/atomic |sh
-
-
-RUN yum -y install ossec-hids-server
+RUN cd /root && \
+  yum -y update && \
+  yum -y install wget useradd postfix && \
+  NON_INT=1 wget -q -O - https://updates.atomicorp.com/installers/atomic | sh && \
+  yum -y install ossec-hids-server && \
+  yum clean all && \
+  rm -rf /var/cache/yum/
 
 ADD default_agent /var/ossec/default_agent
 
@@ -24,7 +24,6 @@ RUN chmod 755 /init.sh &&\
   sync && /init.sh &&\
   sync && rm /init.sh
 
-
 #
 # Add the bootstrap script
 #
@@ -32,12 +31,12 @@ ADD ossec-server.sh /ossec-server.sh
 RUN chmod 755 /ossec-server.sh
 
 #
-# Specify the data volume 
+# Specify the data volume
 #
 VOLUME ["/var/ossec/data"]
 
 # Expose ports for sharing
-EXPOSE 1514/udp 1515/tcp
+EXPOSE 1514/udp 1515/tcp 514/tcp 514/udp
 
 #
 # Define default command.
