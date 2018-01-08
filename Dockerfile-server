@@ -9,6 +9,9 @@ RUN cd /root && \
   yum clean all && \
   rm -rf /var/cache/yum/
 
+RUN curl -Lo /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.9.0/bin/linux/amd64/kubectl && \
+    chmod 755 /usr/local/bin/kubectl
+
 ADD default_agent /var/ossec/default_agent
 
 # copy base config
@@ -28,7 +31,7 @@ RUN chmod 755 /init.sh &&\
 # Add the bootstrap script
 #
 ADD entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
+ADD generate-k8s-client-keys.sh /generate-k8s-client-keys.sh
 
 #
 # Specify the data volume
