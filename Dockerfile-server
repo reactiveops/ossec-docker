@@ -32,6 +32,7 @@ RUN chmod 755 /init.sh &&\
 #
 ADD entrypoint.sh /entrypoint.sh
 ADD generate-k8s-client-keys.sh /generate-k8s-client-keys.sh
+ADD ossec-remoted.sh /ossec-remoted.sh
 
 #
 # Specify the data volume
